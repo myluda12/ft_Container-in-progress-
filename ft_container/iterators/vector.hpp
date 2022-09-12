@@ -35,6 +35,7 @@ namespace ft
                 _size = 0;
                 _capacity = 0;
                 _alloc = allocator_type();
+                _buff = NULL;
               }
 
             explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
