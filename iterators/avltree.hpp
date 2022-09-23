@@ -15,18 +15,15 @@ struct Node
         parent = NULL;
         left = NULL;
         right = NULL;
-        height = 1;
+        height = 1;   
         bg = 0;
     }
 };
 
 
 
-template <
-           class T,                                       // map::mapped_type
-                  // map::key_compare
-           class Alloc = std::allocator<T> > 
-              // map::allocator_type
+template < class T, typename  Compare = std::less<typename T::first_type>,
+     class Alloc = std::allocator<T> > 
 class AVLTree
 {
     private:
