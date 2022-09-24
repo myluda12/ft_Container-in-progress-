@@ -79,12 +79,13 @@ namespace ft
                 }
                 else
                 {
-                    while (node->node_root && node->node_root->right == node)
-                        node = node->node_root;
-                    node = node->parent;
                 }
                 return *this;
             };
+            Bidirectional_iterator &operator--()
+            {
+                
+            }
 
 
 

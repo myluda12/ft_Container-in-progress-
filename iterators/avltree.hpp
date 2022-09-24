@@ -1,5 +1,9 @@
 #include <iostream>
+#include "map.hpp"
 #include "iterator_traits.hpp"
+namespace ft 
+{
+    
 template <class T,class alloc = std::allocator<T> >
 struct Node
 {
@@ -19,7 +23,6 @@ struct Node
         bg = 0;
     }
 };
-
 
 
 template < class T, typename  Compare = std::less<typename T::first_type>,
@@ -145,4 +148,5 @@ class AVLTree
         // }
         // return p;
     }
+};
 };
