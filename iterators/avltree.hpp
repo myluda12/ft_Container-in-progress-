@@ -52,9 +52,22 @@ class AVLTree
 
     int calcule_height(Node *parent)
     {
-        if(parent == NULL)
-            return 0;
-        return parent->height;
+       if(parent->left && parent->right)
+       {
+            if (parent->left->height < parent->right->height)
+                return parent->right->height + 1;
+            else return  parent->left->height + 1;
+        }
+        else if(parent->left && parent->right == NULL)
+        {
+           return parent->left->height + 1;
+        }
+        else if(parent->left ==NULL && parent->right)
+        {
+            return parent->right->height + 1;
+         }
+         return 0;
+
     }
 
     int balance_factor(Node *parent)
@@ -111,19 +124,42 @@ class AVLTree
     {
         if (parent == NULL)
         {
-            // function that returns a node takes T as param
-            // allocate node
-            // construct data 
-            // NULL , NULL , 0 , 0
-            // update node a function that takes node and updates it's attribuites <<<<<<<====
+            Node *n = new Node(data);
+            n->height = 1;
+            return n;
+            
         }
         else
         {
-            //if (comp(node->data < data))
-                //insert(node->data,data)
-            //else
-                //insert(comp(node->data))
+            if (data < parent->data)
+            {
+                parent->left = insert(parent->left,data);
+                parent->left->parent = parent;
+            }
+            else if (data > parent->data)
+            {
+                parent->right = insert(parent->right,data);
+                parent->right->parent = parent;
+            }
+            
         }
+        parent->height = calcule_height(parent);
+        parent->bf = balance_factor(parent);
+        if (parent->bf == 2)
+        {
+            if (balance_factor(parent->left) == 1)
+                return left_left_rotation(parent);
+            else
+                return left_right_rotation(parent);
+        }
+        else if (parent->bf == -2)
+        {
+            if (balance_factor(parent->right) == -1)
+                return right_right_rotation(parent);
+            else
+                return right_left_rotation(parent);
+        }
+        return parent;
         
     }
     void delete(Node *n) {
