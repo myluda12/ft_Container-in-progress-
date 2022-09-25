@@ -10,7 +10,7 @@ struct Node
     Node    *parent;
     Node    *left;
     Node    *right;
-    T       data;
+    ft::pair<const Key, T> *data;
     int     height;
     int     bf;
 
@@ -25,10 +25,16 @@ struct Node
 };
 
 
-template < class T, typename  Compare = std::less<typename T::first_type>,
-     class Alloc = std::allocator<T> > 
+template<class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<Key> >
 class AVLTree
 {
+        typedef Node<Key, T> node;
+        typedef ft::pair<const Key, T> pair;
+        typedef typename Alloc::template rebind<Node>::other rebind_allocator;
+        typedef typename Alloc::template rebind<pair>::other _allocator;
+        rebind_allocator nodeall;
+        _allocator Pair;
+        Compare comp;
     private:
         Node *root;
     

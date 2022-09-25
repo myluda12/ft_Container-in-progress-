@@ -1,34 +1,66 @@
-#include "random_access_iterator.hpp"
-#include "iterator_traits.hpp"
-#include "vector.hpp"
-#include <vector>
-#include <iterator>
-#include <vector>
-#include <iostream>
-#include <iterator>
-#include <utility>
-#include <ctime>
-#include <iomanip>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/time.h>
-#include <random>
-#define TIME_FAC 4 // the ft::Set methods can be slower up to std::set methods * TIME_FAC (MAX 20)
+// #include "random_access_iterator.hpp"
+// #include "iterator_traits.hpp"
+// #include "vector.hpp"
+// #include <vector>
+// #include <iterator>
+// #include <vector>
+// #include <iostream>
+// #include <iterator>
+// #include <utility>
+// #include <ctime>
+// #include <iomanip>
+// #include <unistd.h>---
+// #include <signal.h>
+// #include <sys/time.h>
+// #include <random>
+// #define TIME_FAC 4 // the ft::Set methods can be slower up to std::set methods * TIME_FAC (MAX 20)
 
-#define EQUAL(x) ((x) ? (std::cout << "\033[1;32mAC\033[0m\n") : (std::cout << "\033[1;31mWA\033[0m\n"))
+// #define EQUAL(x) ((x) ? (std::cout << "\033[1;32mAC\033[0m\n") : (std::cout << "\033[1;31mWA\033[0m\n"))
 
-time_t get_time(void)
+// time_t get_time(void)
+// {
+//     struct timeval time_now;
+
+//     gettimeofday(&time_now, NULL);
+//     time_t msecs_time = (time_now.tv_sec * 1e3) + (time_now.tv_usec / 1e3);
+//     return (msecs_time);
+// }
+
+# include "avl.hpp"
+int main()
 {
-    struct timeval time_now;
+    ft::node<int, int>* root;
+    std::pair<int, int> p2(2, 2);
+    std::pair<int, int> p3(3, 3);
+    std::pair<int, int> p1(1, 1);
+    std::pair<int, int> p4(4, 4);
+    std::pair<int, int> p5(5, 5);
+    std::pair<int, int> p6(10, 10);
+    root = NULL;
+    ft::avl<int, int> a;
+    // Function call to insert the nodes
+    root = a.Insert(root, NULL, &p1);
+    root = a.Insert(root, NULL, &p2);
+    root = a.Insert(root, NULL, &p3); 
+    root = a.Insert(root, NULL, &p4);
+    root = a.Insert(root, NULL, &p5);
+    root = a.Insert(root, NULL, &p6);
 
-    gettimeofday(&time_now, NULL);
-    time_t msecs_time = (time_now.tv_sec * 1e3) + (time_now.tv_usec / 1e3);
-    return (msecs_time);
+ 
+    // Print the tree before deleting node
+    std::cout << "Before deletion:\n";
+    a.printpreorder(root);
+ 
+    // Function Call to delete node 10
+    root = a.Delete(root, &p6);
+ 
+    // Print the tree after deleting node
+    std::cout << "After deletion:\n";
+    a.printpreorder(root);
 }
 
-
-int main () {
-    //RAAAANDOOOOOOM ACCCEEEEESSSSS ITEEEERATOOOOOOOOOOOR
+// int main () {
+//     //RAAAANDOOOOOOM ACCCEEEEESSSSS ITEEEERATOOOOOOOOOOOR
      //std::cout << "Parametre Constructor of random_access_iterator\n" << std::endl;
   //  ft::random_access_iterator<int> p1(tab);
   //   ft::random_access_iterator<int> p2(tab + 5);
@@ -403,26 +435,26 @@ int main () {
 
             //NECESSERRYY TEEEST !!!
             
-            ft::vector<int> myvector (3,100);
-            ft::vector<int>::iterator it;
+//             ft::vector<int> myvector (3,100);
+//             ft::vector<int>::iterator it;
 
-            it = myvector.begin();
-            it = myvector.insert ( it , 200 );
+//             it = myvector.begin();
+//             it = myvector.insert ( it , 200 );
 
-            myvector.insert (it,2,300);
+//             myvector.insert (it,2,300);
 
-            // "it" no longer valid, get a new one:
-            it = myvector.begin();
+//             // "it" no longer valid, get a new one:
+//             it = myvector.begin();
 
-            ft::vector<int> anothervector (2,400);
-            myvector.insert (it+2,anothervector.begin(),anothervector.end());
+//             ft::vector<int> anothervector (2,400);
+//             myvector.insert (it+2,anothervector.begin(),anothervector.end());
 
-            int myarray [] = { 501,502,503 };
-            myvector.insert (myvector.begin(), myarray, myarray+3);
+//             int myarray [] = { 501,502,503 };
+//             myvector.insert (myvector.begin(), myarray, myarray+3);
 
-            std::cout << "myvector contains:";
-            for (it=myvector.begin(); it<myvector.end(); it++)
-                std::cout << ' ' << *it;
-            std::cout << '\n';
+//             std::cout << "myvector contains:";
+//             for (it=myvector.begin(); it<myvector.end(); it++)
+//                 std::cout << ' ' << *it;
+//             std::cout << '\n';
         
-}
+// }
