@@ -29,7 +29,7 @@ const T& max(const T& a, const T& b)
 // }
  
 
-template <class Key, class T, class compare = std::less<Key>, class allocator = std::allocator<Key> >
+template <class Key , class T, class compare = std::less<Key>, class allocator = std::allocator<Key> >
 class avl {
 
     typedef node<Key, T> node;
@@ -299,10 +299,7 @@ class avl {
     
     // Function to insert a node in
     // the AVL tree
-    node* Insert(
-        node* root,
-        node* parent,
-        pair *_pair)
+    node* Insert(node* root, node* parent, pair *_pair)
     {
     
         if (root == NULL) {
@@ -409,9 +406,7 @@ class avl {
     
     // Function to delete a node from
     // the AVL tree
-    node* Delete(
-        node* root,
-        pair *_pair)
+    node* Delete(node* root,pair *_pair)
     {
         if (root != NULL) {
     

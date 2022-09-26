@@ -1,5 +1,5 @@
 #pragma once
-#include "avltree.hpp"
+#include "avl.hpp"
 #include <utility>
 #include "reverse_iterator.hpp"
 
@@ -8,7 +8,8 @@ namespace ft
     template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<std::pair<const Key, T>>>
     class map
     {
-    public: // types:                typedef Key                                                     key_type;
+    public: // types:                
+        typedef Key key_type;
         typedef T mapped_type;
         typedef std::pair<const Key, T> value_type;
         typedef Compare key_compare;
@@ -16,7 +17,7 @@ namespace ft
         typedef typename Allocator::reference reference;
         typedef typename Allocator::const_reference const_reference;
         typedef ptrdiff_t difference_type;
-        typedef ft::Node<value_type,allocator_type> node_type;
+        typedef ft::node<value_type,allocator_type> node_type;
         typedef typename ft::bidirectional_iterator<value_type, node_type *> iterator;
         typedef typename ft::bidirectional_iterator<const value_type, node_type *> const_iterator;
         typedef size_t size_type;
@@ -24,7 +25,7 @@ namespace ft
         typedef typename Allocator::const_pointer const_pointer;
         typedef ft::reverse_iterator<iterator> reverse_iterator;
         typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
-        typedef typename ft::AVLTree<value_type, key_compare, allocator_type> tree_type;
+        typedef typename ft::avl<value_type, key_compare, allocator_type> tree_type;
         class value_compare : public binary_function<value_type, value_type, bool>
         {
             friend class map;
@@ -43,14 +44,14 @@ namespace ft
         explicit map(const Compare &comp = Compare(), const Allocator & = Allocator());
 
         template <class InputIterator>
-        map(InputIterator first, InputIterator last, const Compare &comp = Compare(), const Allocator & = Allocator());
+        map(InputIterator first, InputIterator last, const key_compare &comp = Compare(), const Allocator & = Allocator());
 
         map(const map<Key, T, Compare, Allocator> &x);
         ~map();
         map<Key, T, Compare, Allocator> &operator=(const map<Key, T, Compare, Allocator> &x);
 
         // iterators;
-        iterator begin();
+        iterator begin();   
         const_iterator begin() const;
         iterator end();
         const_iterator end() const;
@@ -74,7 +75,10 @@ namespace ft
         }
 
         // 23.3.1.2 element access:
-        T& operator[](const key_type& x);
+        T& operator[](const key_type& x)
+        {
+            return (*((this->insert(ft::make_pair(x, T()))).first)).second;
+        }
 
         // modifiers:
         pair<iterator, bool> insert(const value_type& x);
