@@ -297,8 +297,22 @@ class avl {
         return root;
     }
     
-    // Function to insert a node in
-    // the AVL tree
+    node *findmin(node *root)
+    {
+        if (root == NULL)
+            return NULL;
+        if (root->left != NULL)
+            root = root->left;
+        return root;
+    }
+    node *findmax(node *root)
+    {
+        if (root == NULL)
+            return NULL;
+        if (root->right != NULL)
+            root = root->right;
+        return root;
+    }
     node* Insert(node* root, node* parent, pair *_pair)
     {
     
